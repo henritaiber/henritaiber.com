@@ -7,16 +7,15 @@
   <meta name="description" content="Henri Taiber – Master in Management student at WHU – Otto Beisheim School of Management. Previously at BNP Paribas, ProSiebenSat.1 and BMW M.">
   <meta name="author" content="Henri Taiber">
   <link rel="canonical" href="https://henritaiber.com/">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0a0b0e" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#07080c">
 
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Henri Taiber">
   <meta property="og:title" content="Henri Taiber">
   <meta property="og:description" content="Master in Management student at WHU – Otto Beisheim School of Management. Previously at BNP Paribas, ProSiebenSat.1 and BMW M.">
   <meta property="og:url" content="https://henritaiber.com/">
-  <meta property="og:image" content="https://henritaiber.com/assets/img/og-image.jpg">
+  <meta property="og:image" content="https://henritaiber.com/social-preview.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Henri Taiber – Master in Management at WHU">
@@ -27,7 +26,6 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/site.css">
   <script>document.documentElement.classList.add('js');</script>
 
   <script type="application/ld+json">
@@ -57,8 +55,489 @@
     }
   }
   </script>
+
+  <style>
+    /* ---------- Font (self-hosted, no external requests) ---------- */
+    @font-face {
+      font-family: "Inter";
+      src: url("assets/fonts/inter-var-latin.woff2") format("woff2-variations"),
+           url("assets/fonts/inter-var-latin.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ---------- Design tokens (dark) ---------- */
+    :root {
+      color-scheme: dark;
+      --bg: #07080c;
+      --surface: rgba(255, 255, 255, 0.035);
+      --surface-2: rgba(255, 255, 255, 0.065);
+      --solid: #0f1218;
+      --text: #eef0f5;
+      --muted: #a9b0bd;
+      --faint: #868e9c;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-2: rgba(255, 255, 255, 0.16);
+      --accent: #8ea6ff;
+      --accent-2: #b897ff;
+      --accent-3: #f0abfc;
+      --grad: linear-gradient(110deg, #8ea6ff 0%, #b897ff 55%, #f0abfc 100%);
+      --sky: #8ea6ff;
+      --radius: 22px;
+      --max: 1160px;
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text); background: var(--bg);
+      font-family: var(--font); font-size: 17px; line-height: 1.6; font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(55% 45% at 12% -8%, rgba(88, 115, 255, 0.24), transparent 70%),
+        radial-gradient(45% 40% at 92% 2%, rgba(184, 151, 255, 0.17), transparent 70%),
+        radial-gradient(60% 45% at 50% 115%, rgba(94, 234, 212, 0.07), transparent 70%);
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    p { margin: 0; }
+    h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+    ::selection { background: var(--accent); color: #07080c; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+    svg.icon { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .skip-link { position: absolute; left: 16px; top: -120px; z-index: 100; background: var(--solid); color: var(--text); padding: 10px 14px; border-radius: 10px; text-decoration: none; font-weight: 600; }
+    .skip-link:focus { top: 16px; }
+    .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    /* ---------- Header ---------- */
+    .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid transparent; transition: background-color .3s ease, border-color .3s ease; }
+    .site-header.is-scrolled { background: rgba(7, 8, 12, 0.72); -webkit-backdrop-filter: saturate(160%) blur(16px); backdrop-filter: saturate(160%) blur(16px); border-bottom-color: var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 620; font-size: 16px; letter-spacing: -0.01em; text-decoration: none; }
+    .brand-mark { width: 30px; height: 30px; flex: none; }
+    .brand-mark .bg { fill: #ffffff; }
+    .brand-mark .fg { fill: #07080c; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { display: inline-block; text-decoration: none; color: var(--muted); font-size: 15px; padding: 8px 13px; border-radius: 999px; transition: color .2s ease, background-color .2s ease; }
+    .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+    .nav-links .nav-cta { color: #07080c; background: #ffffff; font-weight: 600; margin-left: 6px; padding: 8px 16px; }
+    .nav-links .nav-cta:hover { color: #07080c; background: #ffffff; opacity: .88; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 22px;
+      border-radius: 999px; font: inherit; font-size: 15.5px; font-weight: 560; text-decoration: none; cursor: pointer;
+      border: 1px solid var(--line-2); background: var(--surface); color: var(--text);
+      transition: transform .2s ease, background-color .2s ease, border-color .2s ease, opacity .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: var(--surface-2); border-color: rgba(255,255,255,.26); }
+    .btn-primary { background: #ffffff; color: #07080c; border-color: #ffffff; }
+    .btn-primary:hover { background: #ffffff; opacity: .9; }
+    .btn .icon { width: 17px; height: 17px; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; isolation: isolate; padding: 72px 0 24px; overflow-x: hidden; overflow-x: clip; }
+    .hero::before {
+      content: ""; position: absolute; z-index: -1; inset: -68px 0 0 0; pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1.3px); background-size: 24px 24px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 20%, #000 25%, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 20%, #000 25%, transparent 75%);
+    }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 64px; align-items: center; }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .kicker::before { content: ""; width: 26px; height: 1px; background: var(--grad); }
+    .hero h1 { margin: 20px 0 22px; font-size: clamp(3.3rem, 8.6vw, 6.9rem); line-height: .93; letter-spacing: -0.055em; font-weight: 680; }
+    .hero h1 .grad-text { padding-right: .04em; }
+    .lead { font-size: clamp(1.12rem, 1.5vw, 1.32rem); line-height: 1.55; color: var(--muted); max-width: 36rem; letter-spacing: -0.01em; }
+    .lead strong { color: var(--text); font-weight: 560; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 28px 0 0; padding: 0; list-style: none; color: var(--faint); font-size: 14.5px; }
+    .hero-meta li { display: inline-flex; align-items: center; gap: 8px; }
+
+    .portrait-wrap { position: relative; justify-self: end; width: 100%; max-width: 410px; margin: 0; }
+    .portrait-wrap::before {
+      content: ""; position: absolute; inset: -2px; z-index: -1; border-radius: 30px;
+      background: var(--grad); filter: blur(34px); opacity: .38;
+    }
+    .portrait-wrap::after { content: ""; position: absolute; inset: 0; border-radius: 28px; border: 1px solid rgba(255,255,255,.18); pointer-events: none; }
+    .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 28px; background: var(--solid); }
+    .portrait-badge {
+      position: absolute; left: -28px; bottom: 30px; display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px 12px 12px; border-radius: 16px; font-size: 14px; line-height: 1.3;
+      background: rgba(15, 18, 24, 0.78); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border: 1px solid var(--line-2); box-shadow: 0 20px 40px -18px rgba(0,0,0,.8);
+    }
+    .badge-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: rgba(142, 166, 255, .16); color: var(--accent); }
+    .portrait-badge strong { display: block; font-weight: 620; letter-spacing: -0.01em; }
+    .portrait-badge small { display: block; font-size: 13px; color: var(--faint); }
+
+    /* ---------- Stats ---------- */
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 72px 0 0; padding: 0; list-style: none; }
+    .stat { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 22px 20px; }
+    .stat-value { font-size: clamp(2.3rem, 4vw, 3.1rem); font-weight: 650; line-height: 1; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+    .stat-label { margin-top: 12px; color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+    .stat-label small { display: block; color: var(--faint); font-size: 12.5px; margin-top: 2px; }
+
+    /* ---------- Journey band (cities) ---------- */
+    .journey { margin-top: 64px; }
+    .journey-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 18px; }
+    .journey-head p { color: var(--faint); font-size: 14px; }
+    .journey-viewport {
+      position: relative; overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .journey-track { display: flex; width: max-content; animation: drift 90s linear infinite; }
+    .journey-viewport:hover .journey-track { animation-play-state: paused; }
+    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .city-tile { flex: none; width: 360px; margin: 0; padding: 0 18px; }
+    .city-tile svg { display: block; width: 100%; height: auto; color: var(--sky); opacity: .55; transition: opacity .3s ease; }
+    .city-tile:hover svg { opacity: .9; }
+    .city-tile figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .city-tile b { font-size: 15px; font-weight: 620; letter-spacing: -0.01em; }
+    .city-tile span { font-size: 13px; color: var(--faint); }
+
+    /* ---------- Sections ---------- */
+    .section { padding: 104px 0; }
+    .section-sep { border: 0; border-top: 1px solid var(--line); margin-block: 0; }
+    .section-grid { display: grid; grid-template-columns: minmax(0, 290px) minmax(0, 1fr); gap: 56px; }
+    .section-head { position: sticky; top: 104px; align-self: start; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 620; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+    .eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--grad); }
+    .section h2 { margin-top: 16px; font-size: clamp(1.9rem, 3.2vw, 2.6rem); line-height: 1.08; letter-spacing: -0.04em; font-weight: 660; }
+    .about-text p { font-size: clamp(1.08rem, 1.45vw, 1.24rem); line-height: 1.65; letter-spacing: -0.008em; color: var(--muted); }
+    .about-text p + p { margin-top: 20px; }
+    .about-text strong { color: var(--text); font-weight: 560; }
+
+    /* ---------- Experience / education cards ---------- */
+    .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .item {
+      position: relative; overflow: hidden; isolation: isolate; padding: 24px 26px 26px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--line);
+      transition: border-color .3s ease, background-color .3s ease, transform .3s ease;
+    }
+    .item:hover { border-color: var(--line-2); background: var(--surface-2); transform: translateY(-2px); }
+    .item .sky {
+      position: absolute; z-index: -1; right: -6px; bottom: -2px; width: min(540px, 88%); height: auto;
+      color: var(--sky); opacity: .19; pointer-events: none; transition: opacity .35s ease;
+      -webkit-mask-image: linear-gradient(to left, #000 30%, transparent 92%);
+      mask-image: linear-gradient(to left, #000 30%, transparent 92%);
+    }
+    .item:hover .sky { opacity: .32; }
+    .item-head { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 16px; align-items: center; }
+    .logo {
+      position: relative; width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; overflow: hidden;
+      background: linear-gradient(145deg, rgba(142, 166, 255, .20), rgba(184, 151, 255, .10)); border: 1px solid var(--line-2);
+      font-size: 11.5px; font-weight: 700; letter-spacing: .02em; color: var(--text);
+    }
+    .logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 7px; background: #ffffff; }
+    .item h3 { font-size: 1.18rem; line-height: 1.3; letter-spacing: -0.022em; font-weight: 640; }
+    .item-role { margin-top: 2px; color: var(--muted); font-size: 15px; line-height: 1.45; }
+    .item-meta { display: grid; justify-items: end; gap: 4px; font-size: 14px; color: var(--faint); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .city { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+    .city .icon { width: 15px; height: 15px; color: var(--accent); }
+    .item ul { list-style: none; margin: 16px 0 0 64px; padding: 0; display: grid; gap: 8px; max-width: 46rem; }
+    .item li { position: relative; padding-left: 18px; font-size: 15.5px; line-height: 1.55; color: #d9dde5; }
+    .item li::before { content: ""; position: absolute; left: 0; top: .68em; width: 6px; height: 6px; border-radius: 50%; background: var(--grad); }
+    .item-note { margin: 12px 0 0 64px; font-size: 15px; color: var(--muted); line-height: 1.55; max-width: 46rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0 64px; }
+    .tag { display: inline-flex; align-items: center; min-height: 26px; padding: 2px 11px; border-radius: 999px; font-size: 13px; font-weight: 560; background: rgba(142, 166, 255, .14); color: #c7d2ff; border: 1px solid rgba(142, 166, 255, .22); }
+
+    /* ---------- Bento ---------- */
+    .bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 26px 24px; }
+    .card h3 { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; letter-spacing: -0.015em; font-weight: 640; }
+    .card h3 .icon { color: var(--accent); }
+    .card h4 { margin: 18px 0 8px; font-size: 12px; font-weight: 640; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { display: inline-flex; align-items: center; min-height: 30px; padding: 3px 12px; border-radius: 999px; border: 1px solid var(--line-2); font-size: 14px; color: #dfe3ea; background: rgba(255, 255, 255, .025); }
+    .list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 14px; }
+    .list li { display: grid; gap: 2px; font-size: 15px; line-height: 1.5; }
+    .list strong { font-weight: 600; letter-spacing: -0.01em; }
+    .list span { color: var(--muted); }
+    .langs { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+    .langs li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 12px; font-size: 15px; }
+    .langs .level { color: var(--muted); font-size: 14px; }
+    .meter { grid-column: 1 / -1; height: 5px; border-radius: 99px; background: rgba(255, 255, 255, .07); overflow: hidden; }
+    .meter i { display: block; height: 100%; border-radius: inherit; background: var(--grad); }
+
+    /* ---------- Contact ---------- */
+    .contact { padding: 40px 0 104px; }
+    .contact-card {
+      position: relative; overflow: hidden; isolation: isolate; border-radius: 34px; padding: clamp(36px, 7vw, 80px) clamp(28px, 7vw, 80px) clamp(120px, 14vw, 170px);
+      background: linear-gradient(135deg, #1b2150 0%, #2a1d55 55%, #3a1d4f 100%); border: 1px solid rgba(255,255,255,.12);
+    }
+    .contact-card::before { content: ""; position: absolute; z-index: -1; width: 620px; height: 620px; right: -160px; top: -280px; background: radial-gradient(closest-side, rgba(142, 166, 255, .45), transparent); }
+    .contact-sky { position: absolute; z-index: -1; left: 0; right: 0; bottom: -2px; width: 100%; height: clamp(90px, 15vw, 170px); color: #ffffff; opacity: .16; pointer-events: none; }
+    .contact-card .eyebrow { color: rgba(255,255,255,.65); }
+    .contact-card h2 { margin-top: 16px; font-size: clamp(2.6rem, 6.4vw, 4.6rem); line-height: 1; letter-spacing: -0.05em; font-weight: 680; }
+    .contact-text { margin-top: 18px; max-width: 34rem; font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: rgba(255,255,255,.76); }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .contact-card .btn { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.24); }
+    .contact-card .btn-primary { background: #ffffff; color: #07080c; border-color: #ffffff; }
+
+    /* ---------- Footer ---------- */
+    .site-footer { padding: 0 0 48px; color: var(--faint); font-size: 14.5px; }
+    .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 8px 22px; list-style: none; margin: 0; padding: 0; }
+    .site-footer a { color: var(--muted); text-decoration: none; }
+    .site-footer a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---------- Scroll reveal (only while JS runs) ---------- */
+    .js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+    .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .hero-grid { gap: 48px; }
+      .section-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .section-head { position: static; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 820px) {
+      .hero { padding-top: 28px; }
+      .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+      .portrait-wrap { order: -1; justify-self: start; max-width: 300px; }
+      .portrait-badge { left: auto; right: -18px; bottom: 18px; }
+      .section { padding: 80px 0; }
+      .bento { grid-template-columns: minmax(0, 1fr); }
+      .nav-links li:not(:last-child) { display: none; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .container { width: calc(100% - 32px); }
+      .portrait-wrap { max-width: 210px; }
+      .portrait-badge { right: -36px; padding: 10px 12px 10px 10px; font-size: 13px; }
+      .badge-icon { width: 32px; height: 32px; }
+      .hero-actions .btn { flex: 1 1 auto; }
+      .stat { padding: 18px 16px; }
+      .item { padding: 20px 18px 22px; }
+      .item-head { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; }
+      .logo { width: 44px; height: 44px; }
+      .item-meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 16px; justify-items: start; }
+      .item ul, .item-note, .tags { margin-left: 0; }
+      .card { padding: 22px 20px; }
+      .city-tile { width: 270px; }
+      .contact-actions .btn { flex: 1 1 100%; }
+      .contact { padding-bottom: 72px; }
+    }
+
+    /* ---------- Motion & print ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .journey-track { animation: none; }
+      .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+      .btn, .item { transition: none; }
+    }
+    @media print {
+      .site-header, .hero-actions, .contact-actions, .skip-link, .journey { display: none !important; }
+      body { background: #fff; color: #000; }
+      body::before { display: none; }
+      .js [data-reveal] { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Stylised, generic city silhouettes (hand-drawn shapes, viewBox 600x160) -->
+      <symbol id="sky-frankfurt" viewBox="0 0 600 160">
+        <g fill="currentColor">
+          <rect x="0" y="122" width="42" height="38"/>
+          <rect x="46" y="104" width="22" height="56"/>
+          <rect x="74" y="42" width="30" height="118"/>
+          <polygon points="74,42 89,14 104,42"/>
+          <rect x="110" y="96" width="26" height="64"/>
+          <rect x="142" y="22" width="40" height="138"/>
+          <rect x="160" y="2" width="4" height="22"/>
+          <rect x="188" y="78" width="24" height="82"/>
+          <rect x="218" y="34" width="34" height="126" rx="12"/>
+          <rect x="233" y="10" width="4" height="26"/>
+          <rect x="258" y="52" width="34" height="108"/>
+          <polygon points="258,53 264,38 275,48 286,38 292,53"/>
+          <rect x="298" y="88" width="30" height="72"/>
+          <rect x="334" y="66" width="38" height="94"/>
+          <rect x="378" y="98" width="26" height="62"/>
+          <rect x="428" y="40" width="8" height="120"/>
+          <ellipse cx="432" cy="60" rx="20" ry="6"/>
+          <ellipse cx="432" cy="71" rx="12" ry="4"/>
+          <rect x="431" y="6" width="2" height="36"/>
+          <rect x="462" y="104" width="34" height="56"/>
+          <rect x="500" y="84" width="24" height="76"/>
+          <rect x="530" y="116" width="40" height="44"/>
+          <rect x="574" y="128" width="26" height="32"/>
+        </g>
+      </symbol>
+
+      <symbol id="sky-munich" viewBox="0 0 600 160">
+        <polygon fill="currentColor" opacity=".4" points="0,128 50,104 92,122 150,90 205,120 262,98 318,124 372,94 430,122 492,100 548,124 600,106 600,160 0,160"/>
+        <g fill="currentColor">
+          <rect x="0" y="126" width="60" height="34"/>
+          <rect x="64" y="112" width="34" height="48"/>
+          <polygon points="104,98 160,72 216,98 216,160 104,160"/>
+          <rect x="120" y="58" width="22" height="102"/>
+          <rect x="178" y="58" width="22" height="102"/>
+          <path d="M119 59 C119 34 143 34 143 59 Z"/>
+          <path d="M177 59 C177 34 201 34 201 59 Z"/>
+          <rect x="130" y="26" width="2" height="14"/>
+          <rect x="188" y="26" width="2" height="14"/>
+          <rect x="222" y="118" width="40" height="42"/>
+          <rect x="268" y="100" width="64" height="60"/>
+          <path d="M280 101 C280 74 320 74 320 101 Z"/>
+          <rect x="298" y="66" width="4" height="12"/>
+          <rect x="336" y="114" width="30" height="46"/>
+          <rect x="370" y="104" width="34" height="56"/>
+          <rect x="440" y="34" width="7" height="126"/>
+          <ellipse cx="443.5" cy="58" rx="16" ry="7"/>
+          <ellipse cx="443.5" cy="69" rx="10" ry="3"/>
+          <rect x="442.5" y="2" width="2" height="34"/>
+          <rect x="476" y="120" width="44" height="40"/>
+          <rect x="524" y="108" width="30" height="52"/>
+          <rect x="558" y="124" width="42" height="36"/>
+        </g>
+      </symbol>
+
+      <symbol id="sky-duesseldorf" viewBox="0 0 600 160">
+        <g fill="currentColor">
+          <rect x="0" y="120" width="44" height="40"/>
+          <rect x="48" y="104" width="28" height="56"/>
+          <polygon points="84,160 84,64 96,52 132,58 132,160"/>
+          <rect x="138" y="112" width="34" height="48"/>
+          <rect x="176" y="96" width="26" height="64"/>
+          <polygon points="245,160 255,160 252,46 248,46"/>
+          <ellipse cx="250" cy="54" rx="15" ry="6"/>
+          <ellipse cx="250" cy="45" rx="10" ry="4"/>
+          <rect x="249" y="4" width="2" height="40"/>
+          <rect x="206" y="128" width="30" height="32"/>
+          <path d="M286 160 V108 C294 98 304 114 314 104 C322 96 328 106 334 100 V160 Z"/>
+          <path d="M340 160 V92 C350 84 358 100 368 90 C376 82 384 94 392 88 V160 Z"/>
+          <path d="M398 160 V114 C406 106 414 118 422 110 V160 Z"/>
+          <rect x="428" y="122" width="30" height="38"/>
+          <rect x="462" y="138" width="138" height="4"/>
+          <rect x="530" y="70" width="6" height="90"/>
+        </g>
+        <path fill="none" stroke="currentColor" stroke-width="1.5" d="M533 74 L470 138 M533 74 L494 138 M533 74 L514 138 M533 74 L552 138 M533 74 L574 138 M533 74 L596 138"/>
+      </symbol>
+
+      <symbol id="sky-barcelona" viewBox="0 0 600 160">
+        <polygon fill="currentColor" opacity=".4" points="0,132 36,112 82,100 130,110 168,128 168,160 0,160"/>
+        <g fill="currentColor">
+          <rect x="0" y="138" width="60" height="22"/>
+          <rect x="64" y="128" width="40" height="32"/>
+          <rect x="108" y="134" width="44" height="26"/>
+          <rect x="196" y="110" width="92" height="50"/>
+          <polygon points="200,112 200,64 206,34 212,64 212,112"/>
+          <polygon points="216,112 216,54 223,22 230,54 230,112"/>
+          <polygon points="234,112 234,40 242,4 250,40 250,112"/>
+          <polygon points="254,112 254,54 261,22 268,54 268,112"/>
+          <polygon points="272,112 272,64 278,34 284,64 284,112"/>
+          <circle cx="206" cy="32" r="2.6"/>
+          <circle cx="223" cy="20" r="2.6"/>
+          <circle cx="242" cy="3" r="2.8"/>
+          <circle cx="261" cy="20" r="2.6"/>
+          <circle cx="278" cy="32" r="2.6"/>
+          <rect x="296" y="120" width="40" height="40"/>
+          <rect x="340" y="132" width="16" height="28"/>
+          <path d="M362 160 V72 C362 38 398 38 398 72 V160 Z"/>
+          <rect x="404" y="118" width="30" height="42"/>
+          <rect x="450" y="46" width="22" height="114"/>
+          <rect x="482" y="46" width="22" height="114"/>
+          <rect x="510" y="122" width="34" height="38"/>
+          <path d="M566 160 C566 130 568 112 572 96 L575 97 C571 113 570 130 570 160 Z"/>
+          <path d="M573 96 C560 89 548 93 542 102 C555 96 564 96 573 99 Z"/>
+          <path d="M573 96 C586 87 597 91 600 97 C591 93 582 95 574 99 Z"/>
+          <path d="M573 96 C567 84 571 75 578 71 C576 81 576 89 575 97 Z"/>
+          <path d="M573 96 C580 83 590 82 596 86 C587 86 580 90 574 98 Z"/>
+        </g>
+      </symbol>
+
+      <symbol id="sky-sandiego" viewBox="0 0 600 160">
+        <rect fill="currentColor" opacity=".35" x="0" y="152" width="600" height="8"/>
+        <g fill="currentColor">
+          <path d="M30 152 C30 124 32 104 36 86 L39 87 C35 105 34 124 34 152 Z"/>
+          <path d="M37 86 C24 79 12 83 6 92 C19 86 28 86 37 89 Z"/>
+          <path d="M37 86 C50 77 61 81 64 87 C55 83 46 85 38 89 Z"/>
+          <path d="M37 86 C31 74 35 65 42 61 C40 71 40 79 39 87 Z"/>
+          <path d="M37 86 C44 73 54 72 60 76 C51 76 44 80 38 88 Z"/>
+          <path d="M70 152 C70 118 73 92 78 70 L81 71 C76 93 74 118 74 152 Z"/>
+          <path d="M79 70 C66 63 54 67 48 76 C61 70 70 70 79 73 Z"/>
+          <path d="M79 70 C92 61 103 65 106 71 C97 67 88 69 80 73 Z"/>
+          <path d="M79 70 C73 58 77 49 84 45 C82 55 82 63 81 71 Z"/>
+          <path d="M79 70 C86 57 96 56 102 60 C93 60 86 64 80 72 Z"/>
+          <rect x="112" y="112" width="30" height="40"/>
+          <rect x="146" y="76" width="30" height="76"/>
+          <rect x="180" y="54" width="34" height="98"/>
+          <polygon points="220,152 220,36 232,12 244,36 244,152"/>
+          <rect x="250" y="44" width="32" height="108"/>
+          <rect x="286" y="70" width="26" height="82"/>
+          <rect x="316" y="58" width="30" height="94"/>
+          <rect x="350" y="88" width="28" height="64"/>
+          <rect x="382" y="106" width="26" height="46"/>
+          <rect x="440" y="121" width="5" height="31"/>
+          <rect x="474" y="111" width="5" height="41"/>
+          <rect x="508" y="106" width="5" height="46"/>
+          <rect x="542" y="106" width="5" height="46"/>
+          <rect x="576" y="110" width="5" height="42"/>
+        </g>
+        <path fill="none" stroke="currentColor" stroke-width="5" d="M412 140 C456 114 520 100 600 110"/>
+      </symbol>
+
+      <symbol id="sky-muenster" viewBox="0 0 600 160">
+        <g fill="currentColor">
+          <rect x="16" y="98" width="28" height="62"/><polygon points="16,99 30,72 44,99"/>
+          <rect x="46" y="92" width="28" height="68"/><polygon points="46,93 60,64 74,93"/>
+          <rect x="76" y="100" width="28" height="60"/><polygon points="76,101 90,76 104,101"/>
+          <rect x="106" y="94" width="28" height="66"/><polygon points="106,95 120,66 134,95"/>
+          <rect x="136" y="98" width="28" height="62"/><polygon points="136,99 150,72 164,99"/>
+          <rect x="166" y="92" width="28" height="68"/><polygon points="166,93 180,64 194,93"/>
+          <rect x="196" y="100" width="28" height="60"/><polygon points="196,101 210,76 224,101"/>
+          <rect x="262" y="70" width="26" height="90"/>
+          <polygon points="262,71 275,8 288,71"/>
+          <rect x="274" y="0" width="2" height="10"/>
+          <rect x="296" y="112" width="40" height="48"/>
+          <rect x="350" y="100" width="130" height="60"/>
+          <polygon points="350,101 415,84 480,101"/>
+          <rect x="362" y="58" width="34" height="102"/>
+          <rect x="434" y="58" width="34" height="102"/>
+          <polygon points="362,59 379,32 396,59"/>
+          <polygon points="434,59 451,32 468,59"/>
+          <rect x="490" y="118" width="40" height="42"/>
+          <rect x="534" y="104" width="30" height="56"/>
+          <rect x="568" y="126" width="32" height="34"/>
+        </g>
+      </symbol>
+
+      <symbol id="sky-vallendar" viewBox="0 0 600 160">
+        <path fill="currentColor" opacity=".4" d="M0 118 C80 78 160 96 240 84 C320 72 380 98 460 82 C520 70 570 88 600 94 V160 H0 Z"/>
+        <g fill="currentColor">
+          <rect x="40" y="128" width="26" height="24"/><polygon points="38,129 53,116 68,129"/>
+          <rect x="74" y="122" width="30" height="30"/><polygon points="72,123 89,108 106,123"/>
+          <rect x="112" y="130" width="24" height="22"/><polygon points="110,131 124,119 138,131"/>
+          <rect x="150" y="124" width="34" height="28"/><polygon points="148,125 167,110 186,125"/>
+          <rect x="196" y="128" width="26" height="24"/><polygon points="194,129 209,116 224,129"/>
+          <rect x="236" y="112" width="96" height="40"/>
+          <polygon points="236,113 284,92 332,113"/>
+          <rect x="290" y="70" width="24" height="82"/>
+          <polygon points="290,71 302,30 314,71"/>
+          <rect x="301" y="20" width="2" height="12"/>
+          <rect x="346" y="126" width="30" height="26"/><polygon points="344,127 361,113 378,127"/>
+          <rect x="388" y="120" width="40" height="32"/><polygon points="386,121 408,104 430,121"/>
+          <rect x="440" y="128" width="26" height="24"/><polygon points="438,129 453,116 468,129"/>
+          <rect x="478" y="124" width="32" height="28"/><polygon points="476,125 494,110 512,125"/>
+          <rect x="524" y="130" width="24" height="22"/><polygon points="522,131 536,119 550,131"/>
+        </g>
+        <path fill="none" stroke="currentColor" stroke-width="2" opacity=".7" d="M0 156 Q 15 151 30 156 T 60 156 T 90 156 T 120 156 T 150 156 T 180 156 T 210 156 T 240 156 T 270 156 T 300 156 T 330 156 T 360 156 T 390 156 T 420 156 T 450 156 T 480 156 T 510 156 T 540 156 T 570 156 T 600 156"/>
+      </symbol>
+    </defs>
+  </svg>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -91,7 +570,8 @@
       <div class="container">
         <div class="hero-grid">
           <div>
-            <h1 data-reveal style="--d:80ms">Henri <span class="gradient">Taiber</span></h1>
+            <p class="kicker" data-reveal>Master in Management · WHU</p>
+            <h1 data-reveal style="--d:80ms">Henri <span class="grad-text">Taiber</span></h1>
             <p class="lead" data-reveal style="--d:160ms">Master in Management student at <strong>WHU – Otto Beisheim School of Management</strong>. Previously at BNP Paribas, ProSiebenSat.1 and BMW&nbsp;M.</p>
             <div class="hero-actions" data-reveal style="--d:240ms">
               <a class="btn btn-primary" href="mailto:henri.taiber@gmail.com">
@@ -138,14 +618,40 @@
             <p class="stat-label">Internships in banking, media and automotive</p>
           </li>
           <li class="stat" data-reveal style="--d:160ms">
-            <div class="stat-value">3</div>
-            <p class="stat-label">Countries studied in: Germany, Spain and the USA</p>
+            <div class="stat-value">7</div>
+            <p class="stat-label">Cities lived, studied and worked in, across three countries</p>
           </li>
           <li class="stat" data-reveal style="--d:240ms">
             <div class="stat-value">4</div>
             <p class="stat-label">Languages: German, English, Spanish and French</p>
           </li>
         </ul>
+      </div>
+
+      <!-- ============ CITIES ============ -->
+      <div class="journey" data-reveal>
+        <div class="container journey-head">
+          <p class="eyebrow">Cities</p>
+          <p>Düsseldorf → Münster → Munich → Barcelona → San Diego → Frankfurt → Vallendar</p>
+        </div>
+        <div class="journey-viewport">
+          <div class="journey-track">
+            <figure class="city-tile"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-duesseldorf" width="600" height="160"/></svg><figcaption><b>Düsseldorf</b><span>Home · HSBC</span></figcaption></figure>
+            <figure class="city-tile"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-muenster" width="600" height="160"/></svg><figcaption><b>Münster</b><span>University of Münster · Börsenparkett</span></figcaption></figure>
+            <figure class="city-tile"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-munich" width="600" height="160"/></svg><figcaption><b>Munich</b><span>ISM · BMW M · ProSiebenSat.1</span></figcaption></figure>
+            <figure class="city-tile"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-barcelona" width="600" height="160"/></svg><figcaption><b>Barcelona</b><span>IQS School of Management</span></figcaption></figure>
+            <figure class="city-tile"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-sandiego" width="600" height="160"/></svg><figcaption><b>San Diego</b><span>UC San Diego</span></figcaption></figure>
+            <figure class="city-tile"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-frankfurt" width="600" height="160"/></svg><figcaption><b>Frankfurt</b><span>BNP Paribas</span></figcaption></figure>
+            <figure class="city-tile"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-vallendar" width="600" height="160"/></svg><figcaption><b>Vallendar</b><span>WHU – Otto Beisheim</span></figcaption></figure>
+            <figure class="city-tile" aria-hidden="true"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-duesseldorf" width="600" height="160"/></svg><figcaption><b>Düsseldorf</b><span>Home · HSBC</span></figcaption></figure>
+            <figure class="city-tile" aria-hidden="true"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-muenster" width="600" height="160"/></svg><figcaption><b>Münster</b><span>University of Münster · Börsenparkett</span></figcaption></figure>
+            <figure class="city-tile" aria-hidden="true"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-munich" width="600" height="160"/></svg><figcaption><b>Munich</b><span>ISM · BMW M · ProSiebenSat.1</span></figcaption></figure>
+            <figure class="city-tile" aria-hidden="true"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-barcelona" width="600" height="160"/></svg><figcaption><b>Barcelona</b><span>IQS School of Management</span></figcaption></figure>
+            <figure class="city-tile" aria-hidden="true"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-sandiego" width="600" height="160"/></svg><figcaption><b>San Diego</b><span>UC San Diego</span></figcaption></figure>
+            <figure class="city-tile" aria-hidden="true"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-frankfurt" width="600" height="160"/></svg><figcaption><b>Frankfurt</b><span>BNP Paribas</span></figcaption></figure>
+            <figure class="city-tile" aria-hidden="true"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-vallendar" width="600" height="160"/></svg><figcaption><b>Vallendar</b><span>WHU – Otto Beisheim</span></figcaption></figure>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -174,49 +680,65 @@
         </div>
         <ol class="timeline">
           <li class="item" data-reveal>
-            <p class="item-when">Feb – Jul 2026</p>
-            <div>
-              <h3>BNP Paribas <span class="item-place">Frankfurt</span></h3>
-              <p class="item-role">Intern, Corporate &amp; Institutional Banking – Corporate Coverage</p>
-              <ul>
-                <li>Supported the coverage team advising German large- and mid-cap corporates across the CIB product range, incl. syndicated &amp; acquisition finance, ECM/DCM and M&amp;A</li>
-                <li>Prepared pitch books, account plans and briefing materials for C-level client meetings, incl. company profiles, capital-structure analyses and peer benchmarking</li>
-                <li>Analysed clients’ financial statements and financing needs to identify refinancing and cross-selling opportunities</li>
-              </ul>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">BNP</div>
+              <div>
+                <h3>BNP Paribas</h3>
+                <p class="item-role">Intern, Corporate &amp; Institutional Banking – Corporate Coverage</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Feb –</span> <span>Jul 2026</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Frankfurt</span></div>
             </div>
+            <ul>
+              <li>Supported the coverage team advising German large- and mid-cap corporates across the CIB product range, incl. syndicated &amp; acquisition finance, ECM/DCM and M&amp;A</li>
+              <li>Prepared pitch books, account plans and briefing materials for C-level client meetings, incl. company profiles, capital-structure analyses and peer benchmarking</li>
+              <li>Analysed clients’ financial statements and financing needs to identify refinancing and cross-selling opportunities</li>
+            </ul>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-frankfurt" width="600" height="160"/></svg>
           </li>
           <li class="item" data-reveal>
-            <p class="item-when">Jun – Aug 2024</p>
-            <div>
-              <h3>ProSiebenSat.1 Media SE <span class="item-place">Munich</span></h3>
-              <p class="item-role">Intern, Coordination External Platforms</p>
-              <ul>
-                <li>Supported the launch of the streaming service Joyn in Switzerland; coordinated content deliveries with Prime Video, Magenta TV and Vodafone</li>
-                <li>Managed streaming metadata for the DACH region in the media asset management system</li>
-              </ul>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">P7S1</div>
+              <div>
+                <h3>ProSiebenSat.1 Media SE</h3>
+                <p class="item-role">Intern, Coordination External Platforms</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Jun –</span> <span>Aug 2024</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Munich</span></div>
             </div>
+            <ul>
+              <li>Supported the launch of the streaming service Joyn in Switzerland; coordinated content deliveries with Prime Video, Magenta TV and Vodafone</li>
+              <li>Managed streaming metadata for the DACH region in the media asset management system</li>
+            </ul>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-munich" width="600" height="160"/></svg>
           </li>
           <li class="item" data-reveal>
-            <p class="item-when">Mar – Sep 2022</p>
-            <div>
-              <h3>BMW M GmbH <span class="item-place">Munich</span></h3>
-              <p class="item-role">Intern, Integration &amp; Development</p>
-              <ul>
-                <li>Coordinated international fleet planning and vehicle orders with the BMW plants in Spartanburg (USA) and San Luis Potosí (Mexico)</li>
-                <li>Prepared the annual Management Board product testing in Miramas (France); organised press and comparison drives</li>
-              </ul>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">BMW</div>
+              <div>
+                <h3>BMW M GmbH</h3>
+                <p class="item-role">Intern, Integration &amp; Development</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Mar –</span> <span>Sep 2022</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Munich</span></div>
             </div>
+            <ul>
+              <li>Coordinated international fleet planning and vehicle orders with the BMW plants in Spartanburg (USA) and San Luis Potosí (Mexico)</li>
+              <li>Prepared the annual Management Board product testing in Miramas (France); organised press and comparison drives</li>
+            </ul>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-munich" width="600" height="160"/></svg>
           </li>
           <li class="item" data-reveal>
-            <p class="item-when">Jul 2019</p>
-            <div>
-              <h3>HSBC Germany <span class="item-place">Düsseldorf</span></h3>
-              <p class="item-role">Intern, Corporate Banking / Credit Services</p>
-              <ul>
-                <li>Supported analysts in drafting credit proposals, industry risk assessments and exposure reports</li>
-                <li>Assisted with market research and industry analyses for client acquisition</li>
-              </ul>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">HSBC</div>
+              <div>
+                <h3>HSBC Germany</h3>
+                <p class="item-role">Intern, Corporate Banking / Credit Services</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Jul 2019</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Düsseldorf</span></div>
             </div>
+            <ul>
+              <li>Supported analysts in drafting credit proposals, industry risk assessments and exposure reports</li>
+              <li>Assisted with market research and industry analyses for client acquisition</li>
+            </ul>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-duesseldorf" width="600" height="160"/></svg>
           </li>
         </ol>
       </div>
@@ -229,50 +751,70 @@
       <div class="container section-grid">
         <div class="section-head" data-reveal>
           <p class="eyebrow">Education</p>
-          <h2 id="education-title">Vallendar, Munich, San Diego and Barcelona.</h2>
+          <h2 id="education-title">Vallendar, Munich, San Diego, Barcelona and Münster.</h2>
         </div>
         <ol class="timeline">
           <li class="item" data-reveal>
-            <p class="item-when"><span>Sep 2026 –</span> <span>May 2028</span></p>
-            <div>
-              <h3>WHU – Otto Beisheim School of Management <span class="item-place">Vallendar</span></h3>
-              <p class="item-role">Master in Management (M.Sc.) · expected May 2028</p>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">WHU</div>
+              <div>
+                <h3>WHU – Otto Beisheim School of Management</h3>
+                <p class="item-role">Master in Management (M.Sc.) · expected May 2028</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Sep 2026 –</span> <span>May 2028</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Vallendar</span></div>
             </div>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-vallendar" width="600" height="160"/></svg>
           </li>
           <li class="item" data-reveal>
-            <p class="item-when"><span>Sep 2022 –</span> <span>Dec 2025</span></p>
-            <div>
-              <h3>International School of Management (ISM) <span class="item-place">Munich</span></h3>
-              <p class="item-role">B.Sc. International Management</p>
-              <div class="tags"><span class="tag">Final grade 1.48</span><span class="tag">Bachelor thesis 1.0</span></div>
-              <p class="item-note">Specialisations in Consulting, Supply Chain Management and Business Communication. Thesis: “The German Supply Chain Due Diligence Act: An analysis of feasibility and implications”.</p>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">ISM</div>
+              <div>
+                <h3>International School of Management (ISM)</h3>
+                <p class="item-role">B.Sc. International Management</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Sep 2022 –</span> <span>Dec 2025</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Munich</span></div>
             </div>
+            <div class="tags"><span class="tag">Final grade 1.48</span><span class="tag">Bachelor thesis 1.0</span></div>
+            <p class="item-note">Specialisations in Consulting, Supply Chain Management and Business Communication. Thesis: “The German Supply Chain Due Diligence Act: An analysis of feasibility and implications”.</p>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-munich" width="600" height="160"/></svg>
           </li>
           <li class="item" data-reveal>
-            <p class="item-when">Sep – Dec 2025</p>
-            <div>
-              <h3>University of California San Diego <span class="item-place">San Diego, USA</span></h3>
-              <p class="item-role">Semester abroad</p>
-              <div class="tags"><span class="tag">GPA 4.0</span></div>
-              <p class="item-note">Business Decision Making, Entrepreneurship &amp; Innovation, Content &amp; Global Marketing.</p>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">UCSD</div>
+              <div>
+                <h3>University of California San Diego</h3>
+                <p class="item-role">Semester abroad</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Sep –</span> <span>Dec 2025</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>San Diego, USA</span></div>
             </div>
+            <div class="tags"><span class="tag">GPA 4.0</span></div>
+            <p class="item-note">Business Decision Making, Entrepreneurship &amp; Innovation, Content &amp; Global Marketing.</p>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-sandiego" width="600" height="160"/></svg>
           </li>
           <li class="item" data-reveal>
-            <p class="item-when">Jan – May 2024</p>
-            <div>
-              <h3>IQS School of Management, Universitat Ramon Llull <span class="item-place">Barcelona, Spain</span></h3>
-              <p class="item-role">Semester abroad</p>
-              <div class="tags"><span class="tag">Distinction</span></div>
-              <p class="item-note">Corporate Finance, Organizational Behavior, Marketing, Digital Marketing.</p>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">IQS</div>
+              <div>
+                <h3>IQS School of Management, Universitat Ramon Llull</h3>
+                <p class="item-role">Semester abroad</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Jan –</span> <span>May 2024</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Barcelona, Spain</span></div>
             </div>
+            <div class="tags"><span class="tag">Distinction</span></div>
+            <p class="item-note">Corporate Finance, Organizational Behavior, Marketing, Digital Marketing.</p>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-barcelona" width="600" height="160"/></svg>
           </li>
           <li class="item" data-reveal>
-            <p class="item-when"><span>Nov 2020 –</span> <span>Mar 2022</span></p>
-            <div>
-              <h3>University of Münster <span class="item-place">Münster</span></h3>
-              <p class="item-role">B.Sc. Business Administration, foundation studies (3 semesters)</p>
-              <p class="item-note">Transferred to ISM.</p>
+            <div class="item-head">
+              <div class="logo" aria-hidden="true">WWU</div>
+              <div>
+                <h3>University of Münster</h3>
+                <p class="item-role">B.Sc. Business Administration, foundation studies (3 semesters)</p>
+              </div>
+              <div class="item-meta"><span class="when"><span>Nov 2020 –</span> <span>Mar 2022</span></span><span class="city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Münster</span></div>
             </div>
+            <p class="item-note">Transferred to ISM.</p>
+            <svg class="sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-muenster" width="600" height="160"/></svg>
           </li>
         </ol>
       </div>
@@ -290,10 +832,12 @@
         <div class="bento">
           <article class="card" data-reveal>
             <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 15 4-4 3 3 5-6"/></svg>Modelling &amp; tools</h3>
-            <h4>Finance</h4>
-            <div class="chips"><span class="chip">DCF</span><span class="chip">LBO</span><span class="chip">Trading &amp; transaction comps</span><span class="chip">Capital-structure analysis</span><span class="chip">Credit analysis</span></div>
+            <h4>Finance &amp; valuation</h4>
+            <div class="chips"><span class="chip">DCF</span><span class="chip">LBO</span><span class="chip">Trading comps</span><span class="chip">Transaction comps</span><span class="chip">Financial statement analysis</span><span class="chip">Capital-structure analysis</span><span class="chip">Credit analysis</span><span class="chip">Peer benchmarking</span><span class="chip">Pitch books</span><span class="chip">Market &amp; industry research</span></div>
             <h4>Tools</h4>
-            <div class="chips"><span class="chip">Excel</span><span class="chip">PowerPoint</span><span class="chip">Word</span><span class="chip">R / RStudio</span><span class="chip">Generative AI</span></div>
+            <div class="chips"><span class="chip">Excel</span><span class="chip">PowerPoint</span><span class="chip">Word</span><span class="chip">R / RStudio</span><span class="chip">GitHub</span><span class="chip">Basic coding</span></div>
+            <h4>AI</h4>
+            <div class="chips"><span class="chip">Generative AI</span><span class="chip">Prompt engineering</span><span class="chip">Agentic workflows</span><span class="chip">AI-assisted analysis</span></div>
           </article>
 
           <article class="card" data-reveal style="--d:80ms">
@@ -312,6 +856,7 @@
               <li><strong>Münsteraner Börsenparkett e.V.</strong><span>Student investment club: equity analysis and trading strategies · 2020 – 2025</span></li>
               <li><strong>Mercedes-Benz Consulting</strong><span>RFP project on the market launch of the electric CLA · grade 1.0</span></li>
               <li><strong>Paulaner Brewery</strong><span>Business workshop on optimising international purchasing processes · grade 1.0</span></li>
+              <li><strong>IQS School of Management</strong><span>Digital marketing project on generating reach with AI and marketing tools · grade 1.0</span></li>
               <li><strong>ISM mentoring programme</strong><span>Buddy for incoming first-year students · 2023 – 2025</span></li>
             </ul>
           </article>
@@ -319,7 +864,7 @@
           <article class="card" data-reveal style="--d:80ms">
             <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.4-7.5-10.1A4.4 4.4 0 0 1 12 7.6a4.4 4.4 0 0 1 7.5 2.8c0 5.7-7.5 10.1-7.5 10.1z"/></svg>Interests</h3>
             <h4>Topics</h4>
-            <div class="chips"><span class="chip">Financial markets</span><span class="chip">Geopolitics</span><span class="chip">Automotive industry</span><span class="chip">Sports industry</span><span class="chip">Entrepreneurship &amp; innovation</span><span class="chip">Artificial intelligence</span><span class="chip">Sustainable supply chains</span></div>
+            <div class="chips"><span class="chip">Financial markets</span><span class="chip">Geopolitics</span><span class="chip">Automotive &amp; e-mobility</span><span class="chip">Sports industry</span><span class="chip">Entrepreneurship &amp; innovation</span><span class="chip">Artificial intelligence</span><span class="chip">Sustainable supply chains</span><span class="chip">Consulting &amp; strategy</span><span class="chip">Digital marketing</span><span class="chip">Media &amp; streaming</span></div>
             <h4>Culture</h4>
             <div class="chips"><span class="chip">Travelling</span><span class="chip">New cultures</span><span class="chip">International cuisine</span></div>
             <h4>Sports</h4>
@@ -335,7 +880,7 @@
         <div class="contact-card" data-reveal>
           <p class="eyebrow">Contact</p>
           <h2 id="contact-title">Let’s talk.</h2>
-          <p class="contact-text">I’m happy to connect, whether it’s about internships, deals or a quick coffee chat.</p>
+          <p class="contact-text">I’m happy to connect, whether it’s about internships, projects or a quick coffee chat.</p>
           <div class="contact-actions">
             <a class="btn btn-primary" href="mailto:henri.taiber@gmail.com">
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
@@ -351,6 +896,7 @@
             </a>
           </div>
           <p class="visually-hidden" aria-live="polite" data-copy-status></p>
+          <svg class="contact-sky" viewBox="0 0 4200 160" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><use href="#sky-duesseldorf" x="0" y="0" width="600" height="160"/><use href="#sky-muenster" x="600" y="0" width="600" height="160"/><use href="#sky-munich" x="1200" y="0" width="600" height="160"/><use href="#sky-barcelona" x="1800" y="0" width="600" height="160"/><use href="#sky-sandiego" x="2400" y="0" width="600" height="160"/><use href="#sky-frankfurt" x="3000" y="0" width="600" height="160"/><use href="#sky-vallendar" x="3600" y="0" width="600" height="160"/></svg>
         </div>
       </div>
     </section>
@@ -377,9 +923,7 @@
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if ('IntersectionObserver' in window && !reduce) {
         var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-          });
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
         }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
         items.forEach(function (el) { io.observe(el); });
       } else {
