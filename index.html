@@ -378,22 +378,22 @@
     .contact { padding: 40px 0 104px; }
     .contact-card {
       position: relative; overflow: hidden; isolation: isolate; border-radius: 34px; padding: clamp(36px, 7vw, 80px) clamp(28px, 7vw, 80px) 0;
-      display: grid; grid-template-columns: minmax(0, 1fr) clamp(240px, 27vw, 340px); column-gap: clamp(28px, 5vw, 64px);
+      display: grid; grid-template-columns: minmax(0, 1fr) clamp(220px, 21vw, 270px); column-gap: clamp(28px, 5vw, 64px);
       background: linear-gradient(135deg, #1b2150 0%, #2a1d55 55%, #3a1d4f 100%); border: 1px solid rgba(255,255,255,.12);
     }
     .contact-main { align-self: start; padding-bottom: clamp(120px, 14vw, 170px); }
 
-    /* Contact photo: rises from the bottom edge in front of the city skylines */
-    .contact-photo { position: relative; z-index: 1; align-self: end; margin: 0; margin-top: 24px; }
+    /* Contact photo: framed, sitting above the city skylines (the skyline band stays fully visible) */
+    .contact-photo { position: relative; z-index: 1; align-self: start; margin: -24px calc(-1 * clamp(0px, 3vw, 36px)) calc(clamp(90px, 15vw, 170px) + 18px) 0; }
     .contact-photo::before {
       content: ""; position: absolute; z-index: -1; inset: 6% -10% -4% -10%; border-radius: 50%; pointer-events: none;
       background: radial-gradient(closest-side, rgba(240, 171, 252, .34), rgba(142, 166, 255, .16) 55%, transparent 75%); filter: blur(10px);
       transition: opacity .5s ease; opacity: .85;
     }
     .contact-photo-frame {
-      position: relative; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 26px 26px 0 0;
-      border: 1px solid rgba(255, 255, 255, .24); border-bottom: 0; background: #d9d6d2;
-      box-shadow: 0 -18px 50px -24px rgba(0, 0, 0, .6); transition: border-color .4s ease;
+      position: relative; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, .24); background: #d9d6d2;
+      box-shadow: 0 30px 60px -28px rgba(0, 0, 0, .7); transition: border-color .4s ease;
     }
     .contact-photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; transition: filter .4s ease; }
     .contact-photo:hover::before { opacity: 1; }
@@ -474,7 +474,7 @@
     @media (max-width: 760px) {
       .contact-card { grid-template-columns: minmax(0, 1fr); }
       .contact-main { padding-bottom: 0; }
-      .contact-photo { justify-self: end; width: min(72%, 300px); margin-top: 36px; }
+      .contact-photo { justify-self: end; width: min(68%, 280px); margin: 32px -12px calc(clamp(90px, 15vw, 170px) + 14px) 0; }
     }
     @media (max-width: 820px) {
       .section { padding: 80px 0; }
