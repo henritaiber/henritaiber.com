@@ -242,7 +242,7 @@
     .rail-txt { min-width: 0; display: grid; gap: 1px; line-height: 1.25; }
     .rail-txt b { font-size: 14.5px; font-weight: 620; letter-spacing: -0.01em; white-space: nowrap; }
     .rail-txt small { font-size: 12.5px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-    .rail-now { margin-left: auto; align-self: flex-start; padding: 2px 8px; border-radius: 99px; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #07080c; background: var(--grad); }
+    .rail-now { margin-left: auto; margin-top: -4px; align-self: flex-start; padding: 2px 8px; border-radius: 99px; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #07080c; background: var(--grad); }
     .rail-sky {
       position: absolute; z-index: -1; right: -8px; bottom: -6px; width: 200px; height: auto; color: var(--sky); opacity: .15; pointer-events: none; transition: opacity .3s ease;
       -webkit-mask-image: linear-gradient(to left, #000 30%, transparent 95%); mask-image: linear-gradient(to left, #000 30%, transparent 95%);
@@ -274,10 +274,14 @@
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
     /* Starts aligned with the page content (Düsseldorf first) and drifts right → left */
-    .journey-track { --gutter: 24px; display: flex; width: max-content; margin-left: calc(max(var(--gutter), (100vw - var(--max)) / 2) - 18px); animation: drift 50s linear infinite; }
-    .js .journey-track { animation-play-state: paused; }
-    .js .journey.is-running .journey-track { animation-play-state: running; }
-    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .journey-track { --gutter: 24px; display: flex; width: max-content; margin-left: calc(max(var(--gutter), (100vw - var(--max)) / 2) - 18px); }
+    html:not(.js) .journey-track { animation: drift 50s linear infinite; }
+    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-33.3333%); } }
+    /* With JS the strip runs on a small physics loop: it drifts, can be dragged, flicked and spun, and eases back to its own pace */
+    .journey.is-live .journey-viewport { cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    .journey.is-live .journey-track { will-change: transform; }
+    .journey-viewport.is-dragging, .journey-viewport.is-dragging .city-tile { cursor: grabbing; }
+    .journey-viewport.is-dragging .city-tile { transform: none; }
     /* Tiles light up under the cursor and open a city card; the strip itself never stops */
     .city-tile {
       flex: none; display: block; width: 360px; margin: 0; padding: 0 18px; border: 0; background: none; color: inherit; font: inherit; text-align: left;
@@ -521,7 +525,7 @@
       .rail-txt { flex: 1; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
       .rail-txt b { font-size: 13px; }
       .rail-txt small { font-size: 11.5px; }
-      .rail-now { align-self: center; padding: 1px 6px; font-size: 9.5px; }
+      .rail-now { align-self: center; margin-top: 0; padding: 1px 6px; font-size: 9.5px; }
       .rail-sky { width: 140px; bottom: -4px; }
       .hero-actions .btn { flex: 1 1 auto; }
       .stat { padding: 18px 16px; }
@@ -595,8 +599,8 @@
     ::view-transition-group(site-header), ::view-transition-group(tabbar), ::view-transition-group(progress) { animation: none; }
     ::view-transition-old(site-header), ::view-transition-old(tabbar), ::view-transition-old(progress) { display: none; }
     ::view-transition-new(site-header), ::view-transition-new(tabbar), ::view-transition-new(progress) { animation: none; }
-    @keyframes page-out { to { opacity: 0; transform: translateX(calc(var(--dir, 1) * -32px)); filter: blur(6px); } }
-    @keyframes page-in { from { opacity: 0; transform: translateX(calc(var(--dir, 1) * 40px)); filter: blur(6px); } }
+    @keyframes page-out { to { opacity: 0; transform: translateX(calc(var(--dir, 1) * -28px)) scale(.995); } }
+    @keyframes page-in { from { opacity: 0; transform: translateX(calc(var(--dir, 1) * 36px)) scale(.995); } }
     @keyframes page-out-m { to { opacity: 0; transform: translateX(calc(var(--dir, 1) * -24px)); } }
     @keyframes page-in-m { from { opacity: 0; transform: translateX(calc(var(--dir, 1) * 32px)); } }
 
@@ -716,6 +720,11 @@
     }
     .city-link:hover, .city-link:focus-visible { color: #ffffff; background: var(--hover-bg); }
     html:not(.js) .city-link, html:not(.js) .city-tile { cursor: default; pointer-events: none; }
+    .journey-hint { display: none; align-items: center; gap: 7px; margin-left: 4px; color: var(--faint); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+    .journey-hint .icon { width: 16px; height: 16px; color: var(--accent); }
+    .journey.is-live .journey-hint { display: inline-flex; }
+    .hint-touch { display: none; }
+    @media (hover: none), (pointer: coarse) { .hint-fine { display: none; } .hint-touch { display: inline; } }
 
     /* Local time in Vallendar (contact page) */
     .contact-time { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-size: 14px; color: rgba(255, 255, 255, .72); font-variant-numeric: tabular-nums; }
@@ -827,7 +836,7 @@
       .tabbar {
         position: fixed; z-index: 60; left: max(10px, env(safe-area-inset-left)); right: max(10px, env(safe-area-inset-right)); bottom: calc(10px + env(safe-area-inset-bottom));
         display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 6px; border-radius: 24px;
-        background: rgba(14, 16, 24, .84); border: 1px solid var(--line-2); -webkit-backdrop-filter: blur(20px) saturate(170%); backdrop-filter: blur(20px) saturate(170%);
+        background: rgba(14, 16, 24, .86); border: 1px solid var(--line-2); -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
         box-shadow: 0 24px 60px -20px rgba(0, 0, 0, .9);
       }
       .tabbar a {
@@ -1214,11 +1223,18 @@
       <!-- CITIES: names and skylines open a city card -->
       <div class="journey" id="cities" data-reveal>
         <div class="container journey-head">
-          <p class="eyebrow">Cities</p>
+          <p class="eyebrow">Cities<span class="journey-hint" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M7 8 3 12l4 4"/><path d="m17 8 4 4-4 4"/><path d="M3 12h18"/></svg><span class="hint-fine">Drag to spin</span><span class="hint-touch">Swipe to spin</span></span></p>
           <p><button type="button" class="city-link" data-city="duesseldorf" aria-haspopup="dialog">Düsseldorf</button><span class="city-dot" aria-hidden="true"> · </span><button type="button" class="city-link" data-city="munich" aria-haspopup="dialog">Munich</button><span class="city-dot" aria-hidden="true"> · </span><button type="button" class="city-link" data-city="vallendar" aria-haspopup="dialog">Vallendar</button><span class="city-dot" aria-hidden="true"> · </span><button type="button" class="city-link" data-city="frankfurt" aria-haspopup="dialog">Frankfurt</button><span class="city-dot" aria-hidden="true"> · </span><button type="button" class="city-link" data-city="muenster" aria-haspopup="dialog">Münster</button><span class="city-dot" aria-hidden="true"> · </span><button type="button" class="city-link" data-city="barcelona" aria-haspopup="dialog">Barcelona</button><span class="city-dot" aria-hidden="true"> · </span><button type="button" class="city-link" data-city="sandiego" aria-haspopup="dialog">San Diego</button></p>
         </div>
         <div class="journey-viewport" role="region" aria-label="City skylines">
           <div class="journey-track">
+            <div class="city-tile dup" aria-hidden="true" data-city="duesseldorf"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-duesseldorf" width="600" height="160"/></svg><span class="city-cap"><b>Düsseldorf<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>Home · HSBC</span></span></div>
+            <div class="city-tile dup" aria-hidden="true" data-city="munich"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-munich" width="600" height="160"/></svg><span class="city-cap"><b>Munich<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>ISM · BMW M · ProSiebenSat.1</span></span></div>
+            <div class="city-tile dup" aria-hidden="true" data-city="vallendar"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-vallendar" width="600" height="160"/></svg><span class="city-cap"><b>Vallendar<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>WHU – Otto Beisheim</span></span></div>
+            <div class="city-tile dup" aria-hidden="true" data-city="frankfurt"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-frankfurt" width="600" height="160"/></svg><span class="city-cap"><b>Frankfurt<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>BNP Paribas</span></span></div>
+            <div class="city-tile dup" aria-hidden="true" data-city="muenster"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-muenster" width="600" height="160"/></svg><span class="city-cap"><b>Münster<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>University of Münster · Börsenparkett</span></span></div>
+            <div class="city-tile dup" aria-hidden="true" data-city="barcelona"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-barcelona" width="600" height="160"/></svg><span class="city-cap"><b>Barcelona<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>IQS School of Management</span></span></div>
+            <div class="city-tile dup" aria-hidden="true" data-city="sandiego"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-sandiego" width="600" height="160"/></svg><span class="city-cap"><b>San Diego<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>UC San Diego</span></span></div>
             <button type="button" class="city-tile" aria-haspopup="dialog" data-city="duesseldorf"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-duesseldorf" width="600" height="160"/></svg><span class="city-cap"><b>Düsseldorf<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>Home · HSBC</span></span></button>
             <button type="button" class="city-tile" aria-haspopup="dialog" data-city="munich"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-munich" width="600" height="160"/></svg><span class="city-cap"><b>Munich<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>ISM · BMW M · ProSiebenSat.1</span></span></button>
             <button type="button" class="city-tile" aria-haspopup="dialog" data-city="vallendar"><svg class="city-sky" viewBox="0 0 600 160" aria-hidden="true" focusable="false"><use href="#sky-vallendar" width="600" height="160"/></svg><span class="city-cap"><b>Vallendar<svg class="icon go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></b><span>WHU – Otto Beisheim</span></span></button>
@@ -1712,22 +1728,143 @@
         });
       }
 
-      /* ---------- City strip: Düsseldorf, Munich, Vallendar first; starts once visible and never pauses ---------- */
-      var journey = $('.journey'), jTimer = null, jo = null;
-      function startJourney() {
-        if (!journey) return;
-        if (reduce) { var vp = $('.journey-viewport', journey); if (vp) vp.setAttribute('tabindex', '0'); return; }
-        journey.classList.remove('is-running');
-        clearTimeout(jTimer);
-        if (!hasIO) { journey.classList.add('is-running'); return; }
-        if (jo) jo.disconnect();
-        jo = new IntersectionObserver(function (entries) {
-          if (entries.some(function (e) { return e.isIntersecting; })) {
-            jo.disconnect();
-            jTimer = setTimeout(function () { journey.classList.add('is-running'); }, 900);
+      /* ---------- City strip: drifts on its own; drag, flick or trackpad-swipe it in either direction and it
+                    spins, then eases back to its own pace and direction. Düsseldorf, Munich, Vallendar come first. ---------- */
+      var journey = $('.journey'), jvp = journey && $('.journey-viewport', journey), jtrack = journey && $('.journey-track', journey);
+      var J = { on: false, visible: false, id: 0, last: 0, W: 0, T: 0, n: 0, vw: 0, m: 0, o: 0, v: 0, hold: false, wheel: false, focus: false, waiting: true, startAt: 0, noClick: false, wt: 0, wto: 0 };
+      var J_BASE = -50, J_TAU = 0.8, J_MAX = 6000;
+      function jNow() { return win.performance && performance.now ? performance.now() : Date.now(); }
+      function jMeasure() {
+        var kids = jtrack.children, n = Math.floor(kids.length / 3);
+        if (!n) return;
+        J.n = n; J.W = kids[n].offsetLeft - kids[0].offsetLeft; J.T = J.W / n;
+        J.vw = jvp.clientWidth; J.m = jtrack.offsetLeft;
+      }
+      /* Three identical sets; the offset only jumps by one set width when the screen would otherwise run out of cities */
+      function jPaint() {
+        if (J.W > 0) {
+          var lo = J.vw - J.m - 2 * J.W + 60, hi = J.W - J.m - 60;
+          while (J.o < lo) J.o += J.W;
+          while (J.o > hi) J.o -= J.W;
+        }
+        jtrack.style.transform = 'translate3d(' + (J.o - J.W).toFixed(2) + 'px,0,0)';
+      }
+      /* Keyboard: bring a focused city fully into view (inside the soft edges) and hold the strip there */
+      function jShow(btn) {
+        var i = [].indexOf.call(jtrack.children, btn) - J.n;
+        if (i < 0 || i >= J.n || !J.T) return;
+        var pad = Math.round(J.vw * 0.09), x = J.m + J.o + i * J.T;
+        if (x < pad) J.o += pad - x;
+        else if (x + J.T > J.vw - pad) J.o -= x + J.T - (J.vw - pad);
+        J.v = 0;
+        jPaint();
+      }
+      function jFrame(t) {
+        J.id = 0;
+        var dt = J.last ? Math.min(0.05, Math.max(0, (t - J.last) / 1000)) : 0;
+        J.last = t;
+        if (!J.hold && !J.wheel) {
+          var target = (J.focus || J.waiting || t < J.startAt) ? 0 : J_BASE;
+          J.v += (target - J.v) * (1 - Math.exp(-dt / J_TAU));
+          J.o += J.v * dt;
+        }
+        jPaint();
+        if (J.on && J.visible && !doc.hidden) J.id = raf(jFrame);
+      }
+      function jRun() { if (J.on && J.visible && !J.id && !doc.hidden) { J.last = 0; J.id = raf(jFrame); } }
+      function jReset() {
+        if (!J.on) return;
+        jMeasure();
+        J.o = 0; J.v = 0; J.waiting = true; J.startAt = 0;
+        jPaint();
+      }
+      if (journey && jvp && jtrack && !reduce && hasIO && win.requestAnimationFrame) {
+        J.on = true;
+        journey.classList.add('is-live');
+        jMeasure(); jPaint();
+        new IntersectionObserver(function (entries) {
+          var e = entries[entries.length - 1];
+          J.visible = e.isIntersecting;
+          if (J.waiting && e.intersectionRatio >= 0.4) { J.waiting = false; J.startAt = jNow() + 900; }
+          if (J.visible) jRun();
+        }, { threshold: [0, 0.4] }).observe(journey);
+        doc.addEventListener('visibilitychange', function () { if (!doc.hidden) jRun(); });
+
+        /* Drag / swipe: the strip follows the finger 1:1, a flick keeps it spinning */
+        var drag = null;
+        jvp.addEventListener('pointerdown', function (e) {
+          if (e.pointerType === 'mouse' && e.button !== 0) return;
+          drag = { id: e.pointerId, x0: e.clientX, x: e.clientX, cap: false, caught: Math.abs(J.v) > 260, s: [[e.timeStamp, e.clientX]] };
+          J.hold = true; J.v = 0; J.waiting = false; J.startAt = 0;
+          jRun();
+        });
+        jvp.addEventListener('pointermove', function (e) {
+          if (!drag || e.pointerId !== drag.id) return;
+          var dx = e.clientX - drag.x;
+          drag.x = e.clientX;
+          J.o += dx;
+          if (!drag.cap && Math.abs(e.clientX - drag.x0) > 6) {
+            drag.cap = true;
+            jvp.classList.add('is-dragging');
+            try { jvp.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
           }
-        }, { threshold: 0.45 });
-        jo.observe(journey);
+          var smp = drag.s;
+          smp.push([e.timeStamp, e.clientX]);
+          while (smp.length > 2 && e.timeStamp - smp[0][0] > 120) smp.shift();
+          if (!J.id) jPaint();
+        });
+        function jRelease(e, cancelled) {
+          if (!drag || (e && e.pointerId !== drag.id)) return;
+          var smp = drag.s, first = smp[0], last = smp[smp.length - 1], v = 0;
+          var now = e && e.timeStamp ? e.timeStamp : last[0];
+          if (!cancelled && smp.length > 1 && now - last[0] < 70 && last[0] > first[0]) v = (last[1] - first[1]) / (last[0] - first[0]) * 1000;
+          J.v = Math.max(-J_MAX, Math.min(J_MAX, v));
+          J.hold = false;
+          if (drag.cap || drag.caught) { J.noClick = true; setTimeout(function () { J.noClick = false; }, 350); }
+          jvp.classList.remove('is-dragging');
+          drag = null;
+          jRun();
+        }
+        jvp.addEventListener('pointerup', function (e) { jRelease(e, false); });
+        jvp.addEventListener('pointercancel', function (e) { jRelease(e, true); });
+        jvp.addEventListener('lostpointercapture', function (e) { if (drag && drag.cap) jRelease(e, false); });
+        /* A drag (or catching a spinning strip) is not a click on a city */
+        jvp.addEventListener('click', function (e) { if (J.noClick) { J.noClick = false; e.preventDefault(); e.stopPropagation(); } }, true);
+        jvp.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+        /* Trackpad / shift + mouse wheel: sideways scrolling moves the strip, vertical scrolling still scrolls the page */
+        jvp.addEventListener('wheel', function (e) {
+          var dx = e.deltaX, dy = e.deltaY;
+          if (e.deltaMode === 1) { dx *= 16; dy *= 16; }
+          if (!dx || Math.abs(dx) <= Math.abs(dy)) return;
+          e.preventDefault();
+          var gap = J.wt ? e.timeStamp - J.wt : 1000;
+          J.wt = e.timeStamp;
+          J.o -= dx;
+          var inst = -dx / Math.max(8, Math.min(gap, 60)) * 1000;
+          J.v = Math.max(-J_MAX, Math.min(J_MAX, gap > 100 ? 0 : J.v * 0.7 + inst * 0.3));
+          J.wheel = true; J.waiting = false; J.startAt = 0;
+          clearTimeout(J.wto);
+          J.wto = setTimeout(function () { J.wheel = false; }, 90);
+          if (!J.id) jPaint();
+          jRun();
+        }, { passive: false });
+
+        /* Keyboard: a focused city stays put; focusing an off-screen city brings it into view */
+        jvp.addEventListener('focusin', function (e) {
+          var kb = false;
+          try { kb = e.target.matches(':focus-visible'); } catch (err) { kb = true; }
+          J.focus = kb;
+          if (kb) { J.waiting = false; jShow(e.target); }
+        });
+        jvp.addEventListener('focusout', function (e) { if (!e.relatedTarget || !jvp.contains(e.relatedTarget)) J.focus = false; });
+        jvp.addEventListener('scroll', function () {
+          if (!jvp.scrollLeft) return;
+          J.o -= jvp.scrollLeft; jvp.scrollLeft = 0;
+          jPaint();
+        }, { passive: true });
+      } else if (jvp && reduce) {
+        jvp.setAttribute('tabindex', '0');
       }
 
       /* ---------- Local time in Vallendar ---------- */
@@ -1779,7 +1916,7 @@
       var rz = false;
       win.addEventListener('resize', function () {
         if (rz) return; rz = true;
-        raf(function () { rz = false; placePills(true); paint(); });
+        raf(function () { rz = false; placePills(true); paint(); if (J.on) { jMeasure(); jPaint(); } });
       }, { passive: true });
       if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { placePills(true); });
 
@@ -1820,7 +1957,7 @@
       }
       function enter(v) {
         reveal(v, true);
-        if (v.id === 'home') { runCounters(); startJourney(); }
+        if (v.id === 'home') { runCounters(); jReset(); }
         if (v.id === 'contact') tick();
       }
       function show(name, target, opts) {
@@ -2153,44 +2290,54 @@
         step(dx < 0 ? 1 : -1);
       }, { passive: true });
 
-      /* ---------- Cursor effects (mouse and trackpad only) ---------- */
+      /* ---------- Cursor effects (mouse and trackpad only), applied at most once per frame ---------- */
+      function perFrame(fn) {
+        var ev = null, queued = false;
+        function run() { queued = false; if (ev) { var e = ev; ev = null; fn(e); } }
+        function handler(e) { ev = e; if (!queued) { queued = true; raf(run); } }
+        handler.cancel = function () { ev = null; };
+        return handler;
+      }
       if (fine) {
-        doc.addEventListener('pointermove', function (e) {
+        doc.addEventListener('pointermove', perFrame(function (e) {
           var t = e.target && e.target.closest ? e.target.closest('.spot') : null;
           if (!t) return;
           var r = t.getBoundingClientRect();
-          t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-          t.style.setProperty('--my', (e.clientY - r.top) + 'px');
-        }, { passive: true });
+          t.style.setProperty('--mx', (e.clientX - r.left).toFixed(1) + 'px');
+          t.style.setProperty('--my', (e.clientY - r.top).toFixed(1) + 'px');
+        }), { passive: true });
       }
       if (fine && !reduce) {
         /* Buttons lean slightly towards the cursor */
         $$('.btn, .nav-cta, .cmdk-btn').forEach(function (m) {
-          m.addEventListener('pointermove', function (e) {
+          var lean = perFrame(function (e) {
             var r = m.getBoundingClientRect();
             var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
             m.style.translate = (x * 10).toFixed(1) + 'px ' + (y * 8).toFixed(1) + 'px';
           });
-          m.addEventListener('pointerleave', function () { m.style.translate = ''; });
+          m.addEventListener('pointermove', lean, { passive: true });
+          m.addEventListener('pointerleave', function () { lean.cancel(); m.style.translate = ''; });
         });
         /* Hero: light orbs lean away from the cursor, the photo tilts towards it */
-        var hero = views.home, p3d = $('.portrait-3d');
-        if (hero) {
-          hero.addEventListener('pointermove', function (e) {
+        var hero = views.home, orbs = hero && $('.orbs', hero), p3d = $('.portrait-3d');
+        if (hero && orbs) {
+          var drift = perFrame(function (e) {
             var r = hero.getBoundingClientRect();
-            hero.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
-            hero.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
-          }, { passive: true });
-          hero.addEventListener('pointerleave', function () { hero.style.setProperty('--px', '0'); hero.style.setProperty('--py', '0'); });
+            orbs.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+            orbs.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+          });
+          hero.addEventListener('pointermove', drift, { passive: true });
+          hero.addEventListener('pointerleave', function () { drift.cancel(); orbs.style.setProperty('--px', '0'); orbs.style.setProperty('--py', '0'); });
         }
         if (p3d) {
-          p3d.addEventListener('pointermove', function (e) {
+          var tilt = perFrame(function (e) {
             var r = p3d.getBoundingClientRect();
             var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
             p3d.style.setProperty('--ry', (x * 9).toFixed(2) + 'deg');
             p3d.style.setProperty('--rx', (-y * 7).toFixed(2) + 'deg');
-          }, { passive: true });
-          p3d.addEventListener('pointerleave', function () { p3d.style.setProperty('--rx', '0deg'); p3d.style.setProperty('--ry', '0deg'); });
+          });
+          p3d.addEventListener('pointermove', tilt, { passive: true });
+          p3d.addEventListener('pointerleave', function () { tilt.cancel(); p3d.style.setProperty('--rx', '0deg'); p3d.style.setProperty('--ry', '0deg'); });
         }
       }
 
